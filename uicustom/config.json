@@ -24,8 +24,8 @@
   "gaugeBackgroundColorAtb": "#222222",
   "gaugeBackgroundColorExp": "#222222",
   "gaugeBackgroundColorExpMaxed": "#222222",
-  "nameX": -30,
-  "nameY": 10,
+  "nameX": 10,
+  "nameY": 1,
   "classX": -10,
   "classY": 10,
   "levelX": -76,
@@ -68,5 +68,16 @@
   "actorImageScaleX": 500,
   "actorImageScaleY": 500,
   "actorImageVertAlign": "middle",
-  "statusBackgroundType": "window"
+  "statusBackgroundType": "window",
+  "statusItemBackgroundType": "none",
+  "statusCursorBackgroundType": "default",
+  "statusPendingBackgroundType": "default",
+  "showName": true,
+  "nameTextAlign": "left",
+  "showClass": true,
+  "classHorzAlign": "right",
+  "classVertAlign": "top",
+  "showTpMode": "off",
+  "nameHorzAlign": "left",
+  "nameBackgroundType": "gradient"
 }
