@@ -3,32 +3,38 @@
 //=============================================================================
 
 /*:
- * @plugindesc (v2.2) Apresenta um medidor de HP para os chefes.
+ * @plugindesc (v2.4 *) Apresenta um medidor de HP para os chefes.
  * @author Moghunter
  *
  * @param Shake Effect
  * @desc Ativar o efeito tremer.
- * @default true 
+ * @default true
+ * @type boolean
  *
  * @param HP Number Visible
  * @desc Apresentar o HP em numeros.
  * @default true
+ * @type boolean
  *
  * @param Show Face
  * @desc Apresentar a face do inimigo.
  * @default true
+ * @type boolean
  *
  * @param Slant Animation
  * @desc Ativar a animação de Flow no medidor de HP.
  * @default true
+ * @type boolean
  *
  * @param Flow Speed
  * @desc Definição da velocidade da animação.
  * @default 4
+ * @type number
  *  
  * @param Name Font Size
  * @desc Definição do tamanho da fonte.
  * @default 18
+ * @type number
  * 
  * @param Layout X-Axis
  * @desc Posição X-Axis do layout.
@@ -38,7 +44,7 @@
  * @desc Posição Y-Axis do layout.
  * @default 10
  *
- * @param BHP Name X-Axis
+ * @param Name X-Axis
  * @desc Posição X-Axis do numero.
  * @default 36
  *
@@ -73,14 +79,17 @@
  * @param Number Percentage
  * @desc Apresentar o número em porcentagem.
  * @default false
+ * @type boolean
  *
  * @param Show States
  * @desc Apresentar o ícones das codições.
  * @default true
+ * @type boolean
  *
  * @param States Max
  * @desc Número maximo dos ícones visiveis.
  * @default 8
+ * @type number
  * 
  * @param States X-axis
  * @desc Posição X-Axis das codições.
@@ -92,12 +101,15 @@
  * 
  * @help  
  * =============================================================================
- * +++ MOG - Boss HP Meter (v2.2) +++
+ * +++ MOG - Boss HP Meter (v2.4) +++
  * By Moghunter 
  * https://atelierrgss.wordpress.com/
  * =============================================================================
  * Apresenta um medidor de HP para os chefes.
  *
+ * =============================================================================
+ * - IMAGES
+ * =============================================================================  
  * Serão necessários os arquivos. (img/bosshp/)
  *
  * Boss_HP_A.png
@@ -106,13 +118,15 @@
  * Boss_HP_D.png 
  *
  * =============================================================================
+ * - ENEMIES NOTETAGS
+ * ============================================================================= 
  * Use a Tag abaixo na caixa de notas para definir quais os inimigos terão o
  * medidor de chefe.
  *
  * Boss HP
  *
  * =============================================================================
- * FACE NAME
+ * - FACE NAME
  * =============================================================================
  * Nomeie as faces dos inimigos da seguinte maneira.
  *
@@ -125,7 +139,9 @@
  * Face_3.png
  * ....
  *
- * -----------------------------------------------------------------------------
+ * =============================================================================
+ * - PLUGIN COMMANDS
+ * =============================================================================
  * Para definir a posição do medidor de HP use o seguinte comentário através do
  * comando PLUGIN COMMAND.
  * 
@@ -141,14 +157,12 @@
  * boss_hp_number_hide
  * boss_hp_number_show
  *
- * -----------------------------------------------------------------------------
- * HISTÓRICO
- * -----------------------------------------------------------------------------
- * v2.2 - Adição dos ícones das condições. 
- *      - Adição dos números em porcentagem.
- * v2.1 - Compatibilidade com o Chrono Engine. 
- * v2.0 - Opção de apresentar a Face do inimigo.
- *      - Adição da animação de flow.
+ * ============================================================================
+ * - WHAT'S  NEW (version 2.4) 
+ * ============================================================================
+ * - (NEW) - Plugins parameters compatíveis com RM1.5+
+ * - (BUG FIX) - Correção de não ocultar os ícones das condições.
+ * - (BUG FIX) - Correção do plugin parameter da posição do nome X-Axis.    
  *
  */
 	
@@ -194,7 +208,6 @@ ImageManager.loadBossHp = function(filename) {
     return this.loadBitmap('img/bosshp/', filename, 0, true);
 };
 
-	
 //=============================================================================
 // ** Game_Temp
 //=============================================================================
@@ -202,9 +215,9 @@ ImageManager.loadBossHp = function(filename) {
 //==============================
 // * Initialize
 //==============================
-var _alias_mog_bosshp_temp_initialize = Game_Temp.prototype.initialize
+var _mog_bosshp_temp_initialize = Game_Temp.prototype.initialize
 Game_Temp.prototype.initialize = function() {
-	_alias_mog_bosshp_temp_initialize.call(this);
+	_mog_bosshp_temp_initialize.call(this);
 	this._battler_bhp_temp = [null,0,false,0];
 	this._battler_bhp_refresh = false;
 	this._battler_bhp_refresh2 = false
@@ -220,9 +233,9 @@ Game_Temp.prototype.initialize = function() {
 //==============================
 // * Initialize
 //==============================
-var _alias_mog_bosshp_sys_initialize = Game_System.prototype.initialize
+var _mog_bosshp_sys_initialize = Game_System.prototype.initialize
 Game_System.prototype.initialize = function() {
-	_alias_mog_bosshp_sys_initialize.call(this);
+	_mog_bosshp_sys_initialize.call(this);
 	this._bosshp_data = [Moghunter.bosshp_layout_x,Moghunter.bosshp_layout_y,Moghunter.bosshp_hp_number_visible];
 	this._battler_bhp_oldNumber = [0,0];
 	this._chronoBossEnemy = null;
@@ -258,9 +271,9 @@ Game_System.prototype.checkBossHpEnemies = function() {
 //==============================
 // * PluginCommand
 //==============================
-var _alias_mog_bosshp_ex_pluginCommand = Game_Interpreter.prototype.pluginCommand
+var _mog_bosshp_ex_pluginCommand = Game_Interpreter.prototype.pluginCommand
 Game_Interpreter.prototype.pluginCommand = function(command, args) {
-	_alias_mog_bosshp_ex_pluginCommand.call(this,command, args)
+	_mog_bosshp_ex_pluginCommand.call(this,command, args)
     this.setPluginCommandBossHP(command, args);
 	return true;
 };
@@ -269,13 +282,13 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
 // * set Plugin Command Boss HP
 //==============================
 Game_Interpreter.prototype.setPluginCommandBossHP = function(command, args) {
-	if (command === "boss_hp_position")  { $gameSystem._bosshp_data[0] = args[1];
+	if (command == "boss_hp_position")  { $gameSystem._bosshp_data[0] = args[1];
 	     $gameSystem._bosshp_data[1] = args[3];};
-	if (command === "boss_hp_number_hide")  {$gameSystem._bosshp_data[2] = "false";};
-	if (command === "boss_hp_number_show")  {$gameSystem._bosshp_data[2] = "true";};
-	if (command === "boss_hp_erase")  {$gameTemp._battler_bhp_remove = "true";};
+	if (command == "boss_hp_number_hide")  {$gameSystem._bosshp_data[2] = "false";};
+	if (command == "boss_hp_number_show")  {$gameSystem._bosshp_data[2] = "true";};
+	if (command == "boss_hp_erase")  {$gameTemp._battler_bhp_remove = "true";};
 	if (Imported.MOG_ChronoEngine) {
-		if (command === "boss_set_event_battler_id")  {
+		if (command == "boss_set_event_battler_id")  {
 			for (var i = 0; i < $gameMap.allEnemiesOnMap().length; i++) {
 				var ev = $gameMap.allEnemiesOnMap()[i];
 				var battler = ev.battler();
@@ -299,28 +312,28 @@ Game_Interpreter.prototype.setPluginCommandBossHP = function(command, args) {
 //==============================
 // * processVictory
 //==============================
-var _alias_mog_bosshp_processVictory = BattleManager.processVictory;
+var _mog_bosshp_processVictory = BattleManager.processVictory;
 BattleManager.processVictory = function() {
 	 $gameTemp._battler_bhp_temp[2] = true
-	 _alias_mog_bosshp_processVictory.call(this);	 
+	 _mog_bosshp_processVictory.call(this);	 
 };
 
 //==============================
 // * processAbort
 //==============================
-var _alias_mog_bosshp_processAbort = BattleManager.processAbort;
+var _mog_bosshp_processAbort = BattleManager.processAbort;
 BattleManager.processAbort = function() {
 	 $gameTemp._battler_bhp_temp[2] = true
-	 _alias_mog_bosshp_processAbort.call(this);	 
+	_mog_bosshp_processAbort.call(this);	 
 };
 
 //==============================
 // * processDefeat
 //==============================
-var _alias_mog_bosshp_processDefeat = BattleManager.processDefeat;
+var _mog_bosshp_processDefeat = BattleManager.processDefeat;
 BattleManager.processDefeat = function() {
 	 $gameTemp._battler_bhp_temp[2] = true
-	 _alias_mog_bosshp_processDefeat.call(this);	 
+	_mog_bosshp_processDefeat.call(this);	 
 };
 
 //=============================================================================
@@ -546,6 +559,23 @@ Scene_Battle.prototype.createSpriteset = function() {
 	this.sortMz();	
 };
 
+//==============================
+// ** update
+//==============================
+var _mog_bossHP_sbattle_update = Scene_Battle.prototype.update;
+Scene_Battle.prototype.update = function() {
+	_mog_bossHP_sbattle_update.call(this);
+    if ($gameTemp._forceCreateBossHud) {this.recreateBossHP()};
+};
+
+//==============================
+// ** recreate Boss HP
+//==============================
+Scene_Battle.prototype.recreateBossHP = function() {
+	$gameTemp._forceCreateBossHud = false;
+    this.createBossHPGauge();	
+};
+
 //=============================================================================
 // ** SpriteSet Base
 //=============================================================================
@@ -658,6 +688,7 @@ Sprite_BossHP.prototype.constructor = Sprite_BossHP;
 Sprite_BossHP.prototype.initialize = function(init_battler) {
     Sprite.prototype.initialize.call(this);	
 	this._init = true;
+	this.opacity = 0;
 	$gameTemp._battler_bhp_temp = [init_battler,init_battler.hp,false,0];
 	this._flowAnimation = String(Moghunter.bosshp_flowAnimation) === "true" ? true : false;
 	this._battler = init_battler;
@@ -687,7 +718,6 @@ Sprite_BossHP.prototype.createSprites = function() {
 //==============================
 Sprite_BossHP.prototype.createLayout = function() {
 	this._layout = new Sprite(ImageManager.loadBossHp("Boss_HP_A"));
-	this._layout.opacity = 0;
 	this.addChild(this._layout);	
 };
 
@@ -755,7 +785,6 @@ Sprite_BossHP.prototype.updateFace = function() {
 	 this._face.x = Moghunter.bosshp_faceX;
 	 this._face.y = Moghunter.bosshp_faceY;
 	 this._face.visible = this._layout.visible;
-	 this._face.opacity = this._layout.opacity;
 };
 
 //==============================
@@ -772,14 +801,12 @@ Sprite_BossHP.prototype.createHPMeter = function() {
 	this._hp_meter_red = new Sprite(ImageManager.loadBossHp("Boss_HP_B"));
 	this._hp_meter_red.x = Moghunter.bosshp_meter_x;
 	this._hp_meter_red.y = Moghunter.bosshp_meter_y;
-	this._hp_meter_red.opacity = 0;
 	this._hp_meter_redFlow = [-1,0,0,0];
 	this._hp_meter_red.setFrame(0,0,1,1);	
 	this.addChild(this._hp_meter_red);
 	this._hp_meter_blue = new Sprite(ImageManager.loadBossHp("Boss_HP_B"));
 	this._hp_meter_blue.x = this._hp_meter_red.x;
 	this._hp_meter_blue.y = this._hp_meter_red.y;	
-	this._hp_meter_blue.opacity = 0;
 	this._hp_meter_blueFlow = [-1,0,0,0];
 	this._hp_meter_blue.setFrame(0,0,1,1);	
 	this.addChild(this._hp_meter_blue);
@@ -795,7 +822,6 @@ Sprite_BossHP.prototype.createHPNumber = function() {
 	for (var i = 0; i < 6; i++) {
 		 this._hp_number[i] = new Sprite(this._hp_number_img);
 		 this._hp_number[i].visible = false;
-		 this._hp_number[i].opacity = 0;
 		 this._hp_number[i].x = Moghunter.bosshp_number_x;
 		 this._hp_number[i].y = Moghunter.bosshp_number_y;
 		 this._hp_number_data[i] = 0;
@@ -822,7 +848,6 @@ Sprite_BossHP.prototype.createName = function() {
 	this.refresh_name();
 	this._name.x = Moghunter.bosshp_name_x;
 	this._name.y = Moghunter.bosshp_name_y;
-	this._name.opacity = 0;
 };
 
 //==============================
@@ -974,20 +999,10 @@ Sprite_BossHP.prototype.need_onSkillCancelites = function() {
 //==============================
 Sprite_BossHP.prototype.onSkillCancelites = function(value) {
 	if (this._init) {
-	   this._layout.opacity = 255;
-	   this._hp_meter_blue.opacity = this._layout.opacity;
-	   this._hp_meter_red.opacity = this._layout.opacity;
-	   if (this._name) {this._name.opacity = this._layout.opacity};
-	   if (this._perSprite) {this._perSprite.opacity = this._layout.opacity}
-	   for (var i = 0; i < 6; i++) {this._hp_number[i].opacity = this._layout.opacity};	
-	   return	
+		this.opacity = 255;
+	    return;
 	};
-	this._layout.opacity -= value;
-	this._hp_meter_blue.opacity = this._layout.opacity;
-	this._hp_meter_red.opacity = this._layout.opacity;
-	if (this._name) {this._name.opacity = this._layout.opacity};
-	if (this._perSprite) {this._perSprite.opacity = this._layout.opacity}
-	for (var i = 0; i < 6; i++) {this._hp_number[i].opacity -= value};
+	this.opacity -= value;
 };
 
 //==============================
