@@ -1,6 +1,6 @@
 {
-  "gameInfoTextLeft": "\\I[190]\n\\I[2274]",
-  "gameInfoTextRight": "\\C[3]\\MN\n\\$ \\C[16]",
+  "gameInfoTextLeft": "\\I[2274]\n\\I[2270]\n\\I[190]\n\\I[220]",
+  "gameInfoTextRight": "\\$ \\C[16]\n\\V[44]\n\\C[3]\\MN\n\\PT",
   "unknownMapName": "\\C[8]Unknown Region",
   "gaugeColorHp1": "#A16207",
   "gaugeColorHp2": "#F59E0B",
@@ -27,7 +27,7 @@
   "nameX": 10,
   "nameY": 1,
   "classX": -10,
-  "classY": 10,
+  "classY": 1,
   "levelX": -76,
   "levelY": -10,
   "hpGaugeX": -10,

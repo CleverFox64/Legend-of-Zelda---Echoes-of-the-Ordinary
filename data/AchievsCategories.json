@@ -1,0 +1,29 @@
+[
+	{
+		"id": 1,
+		"img": "",
+		"menuImg": "",
+		"lockedAchievImg": "",
+		"secretAchievImg": "",
+		"name": "Battle",
+		"sceneName": "",
+		"globalCategory": false,
+		"autoColor": {
+			"color": "",
+			"category": true,
+			"scene": true,
+			"achievs": true,
+			"popUpDesc": false,
+			"popUpAchiev": false,
+			"popUpBorders": false
+		},
+		"Trophy": {
+			"id": 1,
+			"img": "",
+			"lockedImg": "",
+			"description": "This is a description.",
+			"hidden": false,
+			"onUnlock": ""
+		}
+	}
+]
