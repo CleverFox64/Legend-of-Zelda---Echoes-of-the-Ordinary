@@ -93,7 +93,7 @@ var $plugins =
 {"name":"SMO_ConvertCharPatches","status":false,"description":"","parameters":{}},
 {"name":"------------------------","status":false,"description":"----------------------------------------------------------------------------------","parameters":{}},
 {"name":"CGMV_Core","status":true,"description":"Core CGMV Script.","parameters":{}},
-{"name":"CGMV_GameInfo","status":true,"description":"CGMV Game Info","parameters":{"Left Text":"","Center Text":"","Right Text":"v1.0.1","Font Size":"25"}},
+{"name":"CGMV_GameInfo","status":true,"description":"CGMV Game Info","parameters":{"Left Text":"","Center Text":"","Right Text":"v1.0.2","Font Size":"25"}},
 {"name":"------------------------","status":false,"description":"----------------------------------------------------------------------------------","parameters":{}},
 {"name":"------------------------","status":false,"description":"----------------------------------------------------------------------------------","parameters":{}},
 {"name":"Galv_ScreenZoom","status":true,"description":"(v.1.2) Zoom in on a certain part of the screen","parameters":{"Enable Battle Zoom":"false","Battle Zoom":"1"}},
